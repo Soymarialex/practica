@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Español A1- Lección Práctica: Verbos -AR & Modificadores</title>
+    <!-- Tailwind CSS loaded with versioning tag -->
+    <script src="https://cdn.tailwindcss.com?v=1.0"></script>
+    <!-- Confetti script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js?v=1.0"></script>
+    <style>
+        @font-face {
+            font-family: 'Platform';
+            src: local('Platform Medium'), local('Platform-Medium');
+            font-weight: 500;
+        }
+
+        :root {
+            --color-primary: #FF79AC;
+            --color-secondary: #FFB3D1;
+            --color-text: #121118;
+            --color-bg: #FFFFFF;
+            --color-divider: #E0E0E0;
+        }
+
+        body {
+            font-family: 'Platform', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+        p, .justified-text {
+            text-align: justify;
+        }
+
+        h1 {
+            color: var(--color-primary);
+            font-size: clamp(2.2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: var(--color-primary);
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-weight: 700;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .border-divider {
+            border-color: var(--color-divider);
+        }
+
+        .bg-primary {
+            background-color: var(--color-primary);
+        }
+
+        .bg-secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .text-primary {
+            color: var(--color-primary);
+        }
+
+        .text-main {
+            color: var(--color-text);
+        }
+
+        .tab-btn {
+            background-color: #FFFFFF;
+            color: var(--color-text);
+            border: 1px solid var(--color-divider);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .tab-btn.active {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            border-color: var(--color-primary);
+        }
+
+        .btn-action {
+            background-color: var(--color-primary);
+            color: #FFFFFF;
+            transition: opacity 0.2s;
+        }
+
+        .btn-action:hover {
+            opacity: 0.9;
+        }
+
+        .ex-input:focus, .ex-select:focus {
+            outline: 2px solid var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .mc-btn {
+            border: 2px solid var(--color-divider);
+            background-color: #FFFFFF;
+            color: var(--color-text);
+            transition: all 0.2s;
+        }
+
+        .mc-btn:hover {
+            background-color: var(--color-secondary);
+        }
+
+        .mc-btn.selected-correct {
+            background-color: #10B981 !important;
+            color: #FFFFFF !important;
+            border-color: #10B981 !important;
+        }
+
+        .mc-btn.selected-wrong {
+            background-color: #EF4444 !important;
+            color: #FFFFFF !important;
+            border-color: #EF4444 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-16">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b border-divider sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-primary text-white px-3.5 py-2 rounded-2xl font-bold text-xl tracking-wider">
+                    4
+                </div>
+                <div>
+                    <h1>Español Básico (Basic Spanish)</h1>
+                    <p class="text-sm font-semibold text-main opacity-80">Verbos -AR &amp; Modificadores</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <div class="bg-secondary px-3.5 py-1.5 rounded-full border border-divider text-xs font-bold text-main flex items-center gap-1.5">
+                    <span>Present tense</span> <span>Verbos regulares -Ar</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-5xl mx-auto px-4 mt-6">
+
+        <!-- Progress Banner -->
+        <div class="bg-white rounded-2xl p-4 mb-6 border border-divider flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm">
+            <div class="w-full md:w-2/3">
+                <div class="flex justify-between text-sm font-bold text-main mb-1">
+                    <span>Progreso General de la Clase (Overall Class Progress)</span>
+                    <span id="progress-percentage">0%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-3.5 rounded-full overflow-hidden border border-divider">
+                    <div id="progress-bar" class="bg-primary h-full transition-all duration-500 w-0"></div>
+                </div>
+            </div>
+            <button onclick="resetAll()" class="text-xs text-main hover:text-primary underline font-semibold flex items-center gap-1">
+                🔄 Reiniciar todo (Reset All)
+            </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="flex flex-wrap gap-2 mb-8 border-b border-divider pb-2">
+            <button onclick="switchTab('grammar')" id="tab-grammar" class="tab-btn active px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                📖 1. Repaso Gramatical (Grammar Review)
+            </button>
+            <button onclick="switchTab('part1')" id="tab-part1" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                ✍️ 2. Conjugaciones (-AR)
+            </button>
+            <button onclick="switchTab('part2')" id="tab-part2" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                ⚖️ 3. Adjetivos y Cantidades
+            </button>
+            <button onclick="switchTab('part3')" id="tab-part3" class="tab-btn px-4 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2">
+                💬 4. Práctica Final de Conversación
+            </button>
+        </div>
+
+        <!-- SECTION 0: GRAMMAR & VOCABULARY REFERENCE SHEET -->
+        <section id="section-grammar" class="space-y-6">
+            <!-- Cheat Sheet Card 1: -AR Verbs -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-2xl">⚡</span>
+                    <h2 class="w-full">1. Regular -AR Verbs Endings (Terminaciones de Verbos -AR)</h2>
+                </div>
+                <p class="text-sm text-main mb-4 justified-text">
+                    Remove the <strong>-AR</strong> from the verb infinitive and add the ending that matches the subject person (Quita el <strong>-AR</strong> del verbo y añade la terminación correspondiente):
+                </p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
+                    <div class="bg-secondary p-3 rounded-2xl border border-divider">
+                        <span class="block text-xs font-bold text-main">Yo (I)</span>
+                        <span class="text-xl font-extrabold text-primary">-o</span>
+                        <span class="block text-xs text-main opacity-80 mt-1">Hablo (I speak)</span>
+                    </div>
+                    <div class="bg-secondary p-3 rounded-2xl border border-divider">
+                        <span class="block text-xs font-bold text-main">Tú (You - informal)</span>
+                        <span class="text-xl font-extrabold text-primary">-as</span>
+                        <span class="block text-xs text-main opacity-80 mt-1">Hablas (You speak)</span>
+                    </div>
+                    <div class="bg-secondary p-3 rounded-2xl border border-divider">
+                        <span class="block text-xs font-bold text-main">Él / Ella / Ud.</span>
+                        <span class="text-xl font-extrabold text-primary">-a</span>
+                        <span class="block text-xs text-main opacity-80 mt-1">Habla (He/She speaks)</span>
+                    </div>
+                    <div class="bg-secondary p-3 rounded-2xl border border-divider">
+                        <span class="block text-xs font-bold text-main">Nosotros/as (We)</span>
+                        <span class="text-xl font-extrabold text-primary">-amos</span>
+                        <span class="block text-xs text-main opacity-80 mt-1">Hablamos (We speak)</span>
+                    </div>
+                    <div class="bg-secondary p-3 rounded-2xl border border-divider col-span-2 md:col-span-1">
+                        <span class="block text-xs font-bold text-main">Ellos / Ellas / Uds.</span>
+                        <span class="text-xl font-extrabold text-primary">-an</span>
+                        <span class="block text-xs text-main opacity-80 mt-1">Hablan (They speak)</span>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="font-bold text-main text-sm mb-2">Common Verbs to Use (Verbos Comunes):</h3>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>hablar</strong> (to speak)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>estudiar</strong> (to study)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>trabajar</strong> (to work)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>escuchar</strong> (to listen)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>comprar</strong> (to buy)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>necesitar</strong> (to need)</span>
+                        <span class="bg-gray-50 px-3 py-1.5 rounded-lg border border-divider"><strong>tomar</strong> (to take/drink)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cheat Sheet Card 2: Modifiers & Quantifiers -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-2xl">📊</span>
+                    <h2 class="w-full">2. Vocabulary: Modifiers &amp; Quantifiers</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <!-- Quality -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-divider">
+                        <h3 class="font-bold text-primary text-sm mb-2 uppercase tracking-wide">Calidad (Quality)</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <span class="font-bold text-main">bueno / buena</span>
+                                <span class="text-xs text-main opacity-70">(good)</span>
+                            </li>
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <span class="font-bold text-main">malo / mala</span>
+                                <span class="text-xs text-main opacity-70">(bad)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-divider">
+                        <h3 class="font-bold text-primary text-sm mb-2 uppercase tracking-wide">Cantidad (Quantity)</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <div>
+                                    <span class="font-bold text-main">mucho</span>
+                                    <span class="text-xs text-main opacity-70 ml-1">+ uncount. noun / verb</span>
+                                </div>
+                                <span class="text-xs text-main opacity-70">(a lot / much)</span>
+                            </li>
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <div>
+                                    <span class="font-bold text-main">muchos / muchas</span>
+                                    <span class="text-xs text-main opacity-70 ml-1">+ plural noun</span>
+                                </div>
+                                <span class="text-xs text-main opacity-70">(many)</span>
+                            </li>
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <div>
+                                    <span class="font-bold text-main">poco</span>
+                                    <span class="text-xs text-main opacity-70 ml-1">+ uncount. noun / verb</span>
+                                </div>
+                                <span class="text-xs text-main opacity-70">(little / not much)</span>
+                            </li>
+                            <li class="flex justify-between items-center bg-white p-2.5 rounded-xl border border-divider">
+                                <div>
+                                    <span class="font-bold text-main">pocos / pocas</span>
+                                    <span class="text-xs text-main opacity-70 ml-1">+ plural noun</span>
+                                </div>
+                                <span class="text-xs text-main opacity-70">(few / not many)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: HOUR 1 ACTIVITIES (-AR VERBS) -->
+        <section id="section-part1" class="space-y-6 hidden">
+            <div class="bg-primary text-white p-6 rounded-3xl shadow-sm">
+                <h2 class="text-white border-none p-0 m-0 mb-1">Bloque 1: Conjugación de Verbos Regulares -AR</h2>
+                <p class="text-white text-sm opacity-90 justified-text">
+                    Práctica guiada para memorizar y aplicar las terminaciones en el presente del indicativo.
+                </p>
+            </div>
+
+            <!-- Exercise 1.1: Complete the Verb Form -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="w-full">Actividad 1.1: Escribe la forma correcta (Write the correct form)</h2>
+                    <span class="text-xs bg-secondary text-main font-bold px-2.5 py-1 rounded-full whitespace-nowrap">1.1</span>
+                </div>
+                <p class="text-xs text-main opacity-70 mb-6 justified-text">
+                    Escribe únicamente la forma conjugada del verbo en paréntesis. Presiona <strong>Enter</strong> para saltar al siguiente campo.
+                </p>
+
+                <div class="space-y-4 text-sm" id="ex-1-1">
+                    <!-- Sentence 1 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider space-y-2">
+                        <label class="block text-main font-medium justified-text">
+                            1. Yo <input type="text" data-answer="hablo" class="ex-input mx-1 px-3 py-1.5 border-2 border-divider rounded-xl font-bold text-main w-36 text-center" placeholder="hablar"> español en la clase.
+                            <span class="block text-xs text-main opacity-70 font-normal mt-1">(I speak Spanish in class.)</span>
+                        </label>
+                        <div class="feedback hidden text-xs font-bold"></div>
+                    </div>
+
+                    <!-- Sentence 2 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider space-y-2">
+                        <label class="block text-main font-medium justified-text">
+                            2. María <input type="text" data-answer="estudia" class="ex-input mx-1 px-3 py-1.5 border-2 border-divider rounded-xl font-bold text-main w-36 text-center" placeholder="estudiar"> mucho todos los días.
+                            <span class="block text-xs text-main opacity-70 font-normal mt-1">(María studies a lot every day.)</span>
+                        </label>
+                        <div class="feedback hidden text-xs font-bold"></div>
+                    </div>
+
+                    <!-- Sentence 3 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider space-y-2">
+                        <label class="block text-main font-medium justified-text">
+                            3. Nosotros <input type="text" data-answer="trabajamos" class="ex-input mx-1 px-3 py-1.5 border-2 border-divider rounded-xl font-bold text-main w-36 text-center" placeholder="trabajar"> en una oficina.
+                            <span class="block text-xs text-main opacity-70 font-normal mt-1">(We work in an office.)</span>
+                        </label>
+                        <div class="feedback hidden text-xs font-bold"></div>
+                    </div>
+
+                    <!-- Sentence 4 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider space-y-2">
+                        <label class="block text-main font-medium justified-text">
+                            4. ¿Tú <input type="text" data-answer="escuchas" class="ex-input mx-1 px-3 py-1.5 border-2 border-divider rounded-xl font-bold text-main w-36 text-center" placeholder="escuchar"> música latina?
+                            <span class="block text-xs text-main opacity-70 font-normal mt-1">(Do you listen to Latin music?)</span>
+                        </label>
+                        <div class="feedback hidden text-xs font-bold"></div>
+                    </div>
+
+                    <!-- Sentence 5 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider space-y-2">
+                        <label class="block text-main font-medium justified-text">
+                            5. Ellos <input type="text" data-answer="compran" class="ex-input mx-1 px-3 py-1.5 border-2 border-divider rounded-xl font-bold text-main w-36 text-center" placeholder="comprar"> comida en el supermercado.
+                            <span class="block text-xs text-main opacity-70 font-normal mt-1">(They buy food at the supermarket.)</span>
+                        </label>
+                        <div class="feedback hidden text-xs font-bold"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="checkGroup('ex-1-1')" class="btn-action font-bold px-6 py-2.5 rounded-xl shadow-sm">
+                        Comprobar Respuestas (Check Answers)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exercise 1.2: Multiple Choice Verbs -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="w-full">Actividad 1.2: Selecciona la opción correcta (Choose the correct option)</h2>
+                    <span class="text-xs bg-secondary text-main font-bold px-2.5 py-1 rounded-full whitespace-nowrap">1.2</span>
+                </div>
+
+                <div class="space-y-4 text-sm mt-4" id="ex-1-2">
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-bold text-main mb-1 justified-text">1. Carlos y Ana _____ café por la mañana. <span class="text-xs text-main opacity-70 font-normal">(Carlos and Ana drink coffee in the morning.)</span></p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="selectMC(this, 'toman')" class="mc-btn p-2 rounded-xl text-center font-bold">toman</button>
+                            <button onclick="selectMC(this, 'toma')" class="mc-btn p-2 rounded-xl text-center font-bold">toma</button>
+                            <button onclick="selectMC(this, 'tomamos')" class="mc-btn p-2 rounded-xl text-center font-bold">tomamos</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-bold text-main mb-1 justified-text">2. Yo _____ un libro de español. <span class="text-xs text-main opacity-70 font-normal">(I need a Spanish book.)</span></p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="selectMC(this, 'necesitas')" class="mc-btn p-2 rounded-xl text-center font-bold">necesitas</button>
+                            <button onclick="selectMC(this, 'necesito')" class="mc-btn p-2 rounded-xl text-center font-bold">necesito</button>
+                            <button onclick="selectMC(this, 'necesita')" class="mc-btn p-2 rounded-xl text-center font-bold">necesita</button>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-bold text-main mb-1 justified-text">3. Mi amigo y yo _____ inglés y español. <span class="text-xs text-main opacity-70 font-normal">(My friend and I speak English and Spanish.)</span></p>
+                        <div class="grid grid-cols-3 gap-2 mt-2">
+                            <button onclick="selectMC(this, 'hablamos')" class="mc-btn p-2 rounded-xl text-center font-bold">hablamos</button>
+                            <button onclick="selectMC(this, 'hablan')" class="mc-btn p-2 rounded-xl text-center font-bold">hablan</button>
+                            <button onclick="selectMC(this, 'hablas')" class="mc-btn p-2 rounded-xl text-center font-bold">hablas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exercise 1.3: Sentence Reordering -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="w-full">Actividad 1.3: Ordena la oración (Sentence Structure)</h2>
+                    <span class="text-xs bg-secondary text-main font-bold px-2.5 py-1 rounded-full whitespace-nowrap">1.3</span>
+                </div>
+                <p class="text-xs text-main opacity-70 mb-4 justified-text">Escribe la oración ordenada correctamente (Write the sentence in correct order):</p>
+
+                <div class="space-y-4 text-sm" id="ex-1-3">
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-semibold text-primary mb-2 justified-text">Palabras desordenadas: [ en / trabaja / Elena / una escuela ]</p>
+                        <input type="text" data-answer="Elena trabaja en una escuela." class="ex-input w-full px-4 py-2 border-2 border-divider rounded-xl font-medium text-main" placeholder="Escribe aquí...">
+                        <p class="text-xs text-main opacity-70 mt-1 justified-text">(Elena works in a school.)</p>
+                        <div class="feedback hidden text-xs font-bold mt-2"></div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-semibold text-primary mb-2 justified-text">Palabras desordenadas: [ escuchamos / música / nosotros / hoy ]</p>
+                        <input type="text" data-answer="Nosotros escuchamos música hoy." class="ex-input w-full px-4 py-2 border-2 border-divider rounded-xl font-medium text-main" placeholder="Escribe aquí...">
+                        <p class="text-xs text-main opacity-70 mt-1 justified-text">(We listen to music today.)</p>
+                        <div class="feedback hidden text-xs font-bold mt-2"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="checkGroup('ex-1-3')" class="btn-action font-bold px-6 py-2.5 rounded-xl shadow-sm">
+                        Comprobar Oraciones (Check Sentences)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: HOUR 2 ACTIVITIES (BUENO/MALO/MUCHO/POCO) -->
+        <section id="section-part2" class="space-y-6 hidden">
+            <div class="bg-primary text-white p-6 rounded-3xl shadow-sm">
+                <h2 class="text-white border-none p-0 m-0 mb-1">Bloque 2: Adjetivos y Cantidades</h2>
+                <p class="text-white text-sm opacity-90 justified-text">
+                    Práctica focalizada en: <strong>bueno, malo, mucho, muchos, poco, pocos</strong>.
+                </p>
+            </div>
+
+            <!-- Exercise 2.1: Mucho/Muchos/Poco/Pocos Selection -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="w-full">Actividad 2.1: Elige el cuantificador correcto (Choose the right quantifier)</h2>
+                    <span class="text-xs bg-secondary text-main font-bold px-2.5 py-1 rounded-full whitespace-nowrap">2.1</span>
+                </div>
+                <p class="text-xs text-main opacity-70 mb-4 justified-text">
+                    Recuerda: <strong>muchos/pocos</strong> para sustantivos en plural contables, <strong>mucho/poco</strong> para incontables o verbos.
+                </p>
+
+                <div class="space-y-4 text-sm" id="ex-2-1">
+                    <!-- Item 1 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                        <div class="justified-text">
+                            <span class="font-bold text-main">1. Yo estudio _____ (a lot) para el examen.</span>
+                            <span class="block text-xs text-main opacity-70">(I study a lot for the test.)</span>
+                        </div>
+                        <select data-answer="mucho" class="ex-select border-2 border-divider bg-white rounded-xl px-3 py-2 font-bold text-main">
+                            <option value="">Selecciona...</option>
+                            <option value="mucho">mucho</option>
+                            <option value="muchos">muchos</option>
+                            <option value="poco">poco</option>
+                            <option value="pocos">pocos</option>
+                        </select>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                        <div class="justified-text">
+                            <span class="font-bold text-main">2. En la ciudad hay _____ (many) coches.</span>
+                            <span class="block text-xs text-main opacity-70">(In the city there are many cars.)</span>
+                        </div>
+                        <select data-answer="muchos" class="ex-select border-2 border-divider bg-white rounded-xl px-3 py-2 font-bold text-main">
+                            <option value="">Selecciona...</option>
+                            <option value="mucho">mucho</option>
+                            <option value="muchos">muchos</option>
+                            <option value="poco">poco</option>
+                            <option value="pocos">pocos</option>
+                        </select>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                        <div class="justified-text">
+                            <span class="font-bold text-main">3. Tengo _____ (few) libros en español.</span>
+                            <span class="block text-xs text-main opacity-70">(I have few books in Spanish.)</span>
+                        </div>
+                        <select data-answer="pocos" class="ex-select border-2 border-divider bg-white rounded-xl px-3 py-2 font-bold text-main">
+                            <option value="">Selecciona...</option>
+                            <option value="mucho">mucho</option>
+                            <option value="muchos">muchos</option>
+                            <option value="poco">poco</option>
+                            <option value="pocos">pocos</option>
+                        </select>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                        <div class="justified-text">
+                            <span class="font-bold text-main">4. Ella trabaja _____ (a little / not much) el domingo.</span>
+                            <span class="block text-xs text-main opacity-70">(She works a little on Sunday.)</span>
+                        </div>
+                        <select data-answer="poco" class="ex-select border-2 border-divider bg-white rounded-xl px-3 py-2 font-bold text-main">
+                            <option value="">Selecciona...</option>
+                            <option value="mucho">mucho</option>
+                            <option value="muchos">muchos</option>
+                            <option value="poco">poco</option>
+                            <option value="pocos">pocos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="checkSelects('ex-2-1')" class="btn-action font-bold px-6 py-2.5 rounded-xl shadow-sm">
+                        Comprobar Respuestas (Check Answers)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exercise 2.2: Bueno vs Malo in Context -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <div class="flex justify-between items-center mb-2">
+                    <h2 class="w-full">Actividad 2.2: Bueno o Malo (Good or Bad)</h2>
+                    <span class="text-xs bg-secondary text-main font-bold px-2.5 py-1 rounded-full whitespace-nowrap">2.2</span>
+                </div>
+
+                <div class="space-y-4 text-sm mt-4" id="ex-2-2">
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-bold text-main justified-text">1. Este café es muy <input type="text" data-answer="bueno" class="ex-input mx-1 px-3 py-1 border-2 border-divider rounded-xl font-bold text-main w-28 text-center" placeholder="good">. ¡Me gusta!</p>
+                        <p class="text-xs text-main opacity-70 mt-1 justified-text">(This coffee is very good. I like it!)</p>
+                        <div class="feedback hidden text-xs font-bold mt-1"></div>
+                    </div>
+
+                    <div class="p-4 bg-gray-50 rounded-2xl border border-divider">
+                        <p class="font-bold text-main justified-text">2. El clima de hoy es muy <input type="text" data-answer="malo" class="ex-input mx-1 px-3 py-1 border-2 border-divider rounded-xl font-bold text-main w-28 text-center" placeholder="bad">. Hay lluvia.</p>
+                        <p class="text-xs text-main opacity-70 mt-1 justified-text">(Today's weather is very bad. There is rain.)</p>
+                        <div class="feedback hidden text-xs font-bold mt-1"></div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="checkGroup('ex-2-2')" class="btn-action font-bold px-6 py-2.5 rounded-xl shadow-sm">
+                        Verificar Adjetivos (Check Adjectives)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: INTEGRATED PRACTICE / CONVERSATION -->
+        <section id="section-part3" class="space-y-6 hidden">
+            <div class="bg-primary text-white p-6 rounded-3xl shadow-sm">
+                <h2 class="text-white border-none p-0 m-0 mb-1">Práctica Integrada &amp; Conversación</h2>
+                <p class="text-white text-sm opacity-90 justified-text">
+                    Combina verbos <strong>-AR</strong> y los modificadores aprendidos en contextos reales.
+                </p>
+            </div>
+
+            <!-- Complete the Full Dialogue -->
+            <div class="bg-white rounded-3xl p-6 border border-divider shadow-sm">
+                <h2 class="w-full">Actividad Final: Completa el Diálogo (Complete the Conversation)</h2>
+                <p class="text-xs text-main opacity-70 mb-6 justified-text">Rellena los espacios con la forma correcta de los verbos o los modificadores indicados en paréntesis.</p>
+
+                <div class="space-y-4 text-sm bg-gray-50 p-6 rounded-2xl border border-divider" id="ex-3">
+                    <p class="leading-relaxed justified-text">
+                        <strong>Juan:</strong> ¡Hola! ¿Tú <input type="text" data-answer="estudias" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-32 text-center" placeholder="estudiar"> aquí?
+                        <span class="block text-xs text-main opacity-70 font-normal mb-2">(Hello! Do you study here?)</span>
+                    </p>
+
+                    <p class="leading-relaxed justified-text">
+                        <strong>María:</strong> Sí, yo <input type="text" data-answer="estudio" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-32 text-center" placeholder="estudiar"> español. Tengo <input type="text" data-answer="muchos" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-28 text-center" placeholder="many"> libros en mi mochila.
+                        <span class="block text-xs text-main opacity-70 font-normal mb-2">(Yes, I study Spanish. I have many books in my backpack.)</span>
+                    </p>
+
+                    <p class="leading-relaxed justified-text">
+                        <strong>Juan:</strong> ¡Qué <input type="text" data-answer="bueno" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-28 text-center" placeholder="good">! ¿Y tu profesor es bueno?
+                        <span class="block text-xs text-main opacity-70 font-normal mb-2">(How good! And is your teacher good?)</span>
+                    </p>
+
+                    <p class="leading-relaxed justified-text">
+                        <strong>María:</strong> Sí, él <input type="text" data-answer="habla" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-32 text-center" placeholder="hablar"> muy bien. Nosotros <input type="text" data-answer="escuchamos" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-36 text-center" placeholder="escuchar"> audios y practicamos <input type="text" data-answer="mucho" class="ex-input mx-1 px-2 py-1 border-2 border-divider rounded-lg font-bold text-main w-28 text-center" placeholder="a lot">.
+                        <span class="block text-xs text-main opacity-70 font-normal mb-2">(Yes, he speaks very well. We listen to audio and practice a lot.)</span>
+                    </p>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button onclick="checkGroup('ex-3')" class="btn-action font-bold px-6 py-2.5 rounded-xl shadow-sm">
+                        Comprobar Diálogo Final (Check Final Dialogue)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Free Speaking Prompts for Student/Teacher -->
+            <div class="bg-secondary rounded-3xl p-6 border border-divider">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-2xl">🗣️</span>
+                    <h2 class="w-full text-main border-main">Guía de Conversación Oral (Speaking Prompts for Class)</h2>
+                </div>
+                <p class="text-xs text-main opacity-80 mb-4 justified-text">El estudiante responde oralmente al profesor usando los verbos y modificadores aprendidos:</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-white p-3.5 rounded-2xl border border-divider">
+                        <span class="font-bold text-main block justified-text">1. ¿Qué compras en el supermercado?</span>
+                        <span class="text-xs text-main opacity-70 block mb-1 justified-text">(What do you buy at the supermarket?)</span>
+                        <span class="text-xs font-bold text-primary block justified-text">Ejemplo: "Yo compro muchas frutas y un buen café."</span>
+                    </div>
+
+                    <div class="bg-white p-3.5 rounded-2xl border border-divider">
+                        <span class="font-bold text-main block justified-text">2. ¿Trabajas mucho o poco los fines de semana?</span>
+                        <span class="text-xs text-main opacity-70 block mb-1 justified-text">(Do you work a lot or a little on weekends?)</span>
+                        <span class="text-xs font-bold text-primary block justified-text">Ejemplo: "Yo trabajo mucho los sábados pero los domingos trabajo poco."</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tabId) {
+            document.querySelectorAll('section[id^="section-"]').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            activeBtn.classList.add('active');
+        }
+
+        // Setup Enter Key listener to focus next input field automatically
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = Array.from(document.querySelectorAll('.ex-input, .ex-select'));
+            inputs.forEach((input, index) => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const parentGroup = input.closest('section');
+                        if (parentGroup) {
+                            // Check single input state immediately on Enter
+                            validateSingleInput(input);
+                        }
+                        // Jump to next input
+                        if (index + 1 < inputs.length) {
+                            inputs[index + 1].focus();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Validate individual input
+        function validateSingleInput(input) {
+            const userVal = input.value.trim().toLowerCase();
+            const targetVal = input.getAttribute('data-answer').toLowerCase();
+            if (userVal === targetVal && userVal !== '') {
+                input.classList.remove('border-divider', 'border-red-400');
+                input.classList.add('border-green-500', 'bg-green-50');
+            }
+            updateProgress();
+        }
+
+        // Multiple choice selection tracking
+        function selectMC(btn, answer) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.mc-btn').forEach(b => {
+                b.classList.remove('selected-correct', 'selected-wrong');
+            });
+
+            if (btn.innerText.trim().toLowerCase() === answer.toLowerCase()) {
+                btn.classList.add('selected-correct');
+                triggerConfetti();
+            } else {
+                btn.classList.add('selected-wrong');
+            }
+            updateProgress();
+        }
+
+        // Check text input exercises
+        function checkGroup(containerId) {
+            const container = document.getElementById(containerId);
+            const inputs = container.querySelectorAll('.ex-input');
+            let correctCount = 0;
+
+            inputs.forEach(input => {
+                const userVal = input.value.trim().toLowerCase();
+                const targetVal = input.getAttribute('data-answer').toLowerCase();
+                const parentBox = input.closest('.p-4') || input.parentElement;
+                let feedbackEl = parentBox.querySelector('.feedback');
+
+                if (userVal === targetVal) {
+                    input.classList.remove('border-divider', 'border-red-400');
+                    input.classList.add('border-green-500', 'bg-green-50');
+                    correctCount++;
+                    if (feedbackEl) {
+                        feedbackEl.classList.remove('hidden', 'text-red-600');
+                        feedbackEl.classList.add('text-green-600');
+                        feedbackEl.innerHTML = '<strong>¡Correcto! (Correct)</strong>';
+                    }
+                } else {
+                    input.classList.remove('border-divider', 'border-green-500');
+                    input.classList.add('border-red-400', 'bg-red-50');
+                    if (feedbackEl) {
+                        feedbackEl.classList.remove('hidden', 'text-green-600');
+                        feedbackEl.classList.add('text-red-600');
+                        feedbackEl.innerHTML = `<strong>Respuesta correcta:</strong> ${targetVal}`;
+                    }
+                }
+            });
+
+            if (correctCount === inputs.length && correctCount > 0) {
+                triggerConfetti();
+            }
+            updateProgress();
+        }
+
+        // Check select element exercises
+        function checkSelects(containerId) {
+            const container = document.getElementById(containerId);
+            const selects = container.querySelectorAll('.ex-select');
+            let correctCount = 0;
+
+            selects.forEach(select => {
+                const userVal = select.value.trim().toLowerCase();
+                const targetVal = select.getAttribute('data-answer').toLowerCase();
+
+                if (userVal === targetVal) {
+                    select.classList.remove('border-divider', 'border-red-400');
+                    select.classList.add('border-green-500', 'bg-green-50');
+                    correctCount++;
+                } else {
+                    select.classList.remove('border-divider', 'border-green-500');
+                    select.classList.add('border-red-400', 'bg-red-50');
+                }
+            });
+
+            if (correctCount === selects.length && correctCount > 0) {
+                triggerConfetti();
+            }
+            updateProgress();
+        }
+
+        // Calculate progress across all inputs & choice buttons
+        function updateProgress() {
+            const allInputs = document.querySelectorAll('.ex-input, .ex-select');
+            let correct = 0;
+
+            allInputs.forEach(el => {
+                const userVal = el.value.trim().toLowerCase();
+                const targetVal = el.getAttribute('data-answer').toLowerCase();
+                if (userVal === targetVal && userVal !== '') correct++;
+            });
+
+            const mcCorrect = document.querySelectorAll('.mc-btn.selected-correct').length;
+            const totalItems = allInputs.length + document.querySelectorAll('#ex-1-2 .p-4').length;
+            const totalScore = correct + mcCorrect;
+
+            const percentage = Math.round((totalScore / totalItems) * 100);
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-percentage').innerText = percentage + '%';
+        }
+
+        // Confetti effect
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+            }
+        }
+
+        // Reset all inputs
+        function resetAll() {
+            document.querySelectorAll('.ex-input').forEach(i => {
+                i.value = '';
+                i.classList.remove('border-green-500', 'border-red-400', 'bg-green-50', 'bg-red-50');
+                i.classList.add('border-divider');
+            });
+            document.querySelectorAll('.ex-select').forEach(s => {
+                s.value = '';
+                s.classList.remove('border-green-500', 'border-red-400', 'bg-green-50', 'bg-red-50');
+                s.classList.add('border-divider');
+            });
+            document.querySelectorAll('.feedback').forEach(f => f.classList.add('hidden'));
+            document.querySelectorAll('.mc-btn').forEach(b => {
+                b.classList.remove('selected-correct', 'selected-wrong');
+            });
+            updateProgress();
+        }
+    </script>
+</body>
+</html>
